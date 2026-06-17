@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>Admin — STUDIO</title>
+  <style>
+    /* ---- Styles spécifiques au dashboard admin ---- */
+    .admin-wrap { max-width: 780px; margin: 0 auto; padding: 0 24px; }
+    .login-box { max-width: 380px; margin: 0 auto; padding: 60px 0; }
+    .login-box h2 { font-family: var(--display); font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+    .login-box p { color: var(--muted); font-size: 14px; margin-bottom: 24px; }
+    .login-box .field input { font-family: var(--mono); }
+    .login-err { color: var(--g1); font-family: var(--mono); font-size: 12px; margin-top: 10px; display: none; }
+
+    .toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; flex-wrap: wrap; gap: 14px; }
+    .toolbar h2 { font-family: var(--display); font-size: 24px; font-weight: 700; }
+    .toolbar-btns { display: flex; gap: 10px; }
+    .sm-btn { font-family: var(--mono); font-size: 12px; padding: 8px 16px; border-radius: 8px;
+      border: 1px solid var(--line); background: rgba(255,255,255,.04); color: var(--text); cursor: pointer;
+      transition: border-color .2s, background .2s; }
+    .sm-btn:hover { border-color: rgba(177,75,255,.5); background: rgba(177,75,255,.06); }
+    .sm-btn.danger { color: var(--g1); border-color: rgba(255,46,126,.3); }
+    .sm-btn.danger:hover { background: rgba(255,46,126,.08); border-color: rgba(255,46,126,.5); }
+    .sm-btn.primary { color: #0a0a0c; background: #fff; border-color: #fff; }
+    .sm-btn.primary:hover { box-shadow: 0 6px 24px -6px var(--glow); }
+
+    .editor { display: none; }
+    .editor .field input, .editor .field textarea { font-size: 15px; }
+    .editor textarea.content { min-height: 300px; font-family: var(--mono); font-size: 13px; line-height: 1.7; }
+    .editor .hint { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-top: 6px; }
+
+    .post-list-admin { display: flex; flex-direction: column; gap: 12px; }
+    .post-item { display: flex; justify-content: space-between; align-items: center; gap: 14px;
+      border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; background: var(--surface);
+      transition: border-color .3s; }
+    .post-item:hover { border-color: rgba(177,75,255,.3); }
+    .post-item .info h4 { font-family: var(--display); font-size: 17px; font-weight: 600; }
+    .post-item .info p { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-top: 4px; }
+    .post-item .actions { display: flex; gap: 8px; flex-shrink: 0; }
+    .empty { text-align: center; color: var(--muted); font-family: var(--mono); padding: 50px 0; font-size: 14px; }
+
+    @media(max-width:560px) {
+      .post-item { flex-direction: column; align-items: flex-start; }
+      .post-item .actions { align-self: flex-end; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ======================== NAVIGATION ======================== -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="brand">
+        <!-- MODIFIER : Logo + Nom -->
+        <span class="logo-mark"></span>
+        <a href="index.html"><b>STUDIO</b></a>
+      </div>
+      <div class="nav-links">
+        <a href="jeux.html">JEUX</a>
+        <a href="studio.html">STUDIO</a>
+        <a href="actualites.html">DEVLOG</a>
+        <a href="presse.html">PRESSE</a>
+      </div>
+      <a class="nav-cta" href="contact.html">CONTACT</a>
+    </div>
+  </nav>
+
+  <!-- ======================== ZONE ADMIN ======================== -->
+  <section class="section" style="padding-top:100px">
+
+    <!-- ============ ÉCRAN DE LOGIN ============ -->
+    <!-- Visible tant que l'admin n'est pas connecté -->
+    <div id="login-view" class="login-box">
+      <p class="label">// admin.auth()</p>
+      <h2>Espace admin</h2>
+      <p>Connecte-toi pour gérer le devlog.</p>
+      <div class="field">
+        <label for="pwd">// mot de passe</label>
+        <!-- MODIFIER : Le mot de passe par défaut est "studio2024" — change-le dans admin.js (voir ADMIN_HASH) -->
+        <input id="pwd" type="password" placeholder="••••••••" autocomplete="off" />
+      </div>
+      <button class="btn-primary" style="border:none;cursor:pointer;width:100%;text-align:center;margin-top:14px" id="login-btn">
+        SE CONNECTER
+      </button>
+      <p class="login-err" id="login-err">// accès refusé</p>
+    </div>
+
+    <!-- ============ DASHBOARD (visible après login) ============ -->
+    <div id="dashboard" class="admin-wrap" style="display:none">
+
+      <!-- Barre d'outils -->
+      <div class="toolbar">
+        <h2>// devlog</h2>
+        <div class="toolbar-btns">
+          <button class="sm-btn primary" id="new-btn">+ Nouvel article</button>
+          <button class="sm-btn danger" id="logout-btn">Déconnexion</button>
+        </div>
+      </div>
+
+      <!-- Éditeur d'article (s'affiche au clic sur "Nouvel article" ou "Éditer") -->
+      <div class="editor" id="editor">
+        <div class="field">
+          <label>// titre</label>
+          <input id="ed-title" type="text" placeholder="Titre de l'article" />
+        </div>
+        <div class="field">
+          <label>// contenu (HTML accepté)</label>
+          <textarea class="content" id="ed-content" placeholder="<p>Écris ton article ici...</p>&#10;&#10;<p>HTML supporté : &lt;p&gt;, &lt;h3&gt;, &lt;strong&gt;, &lt;em&gt;, &lt;a&gt;, &lt;img&gt;, &lt;ul&gt;/&lt;li&gt;...</p>"></textarea>
+          <p class="hint">Le contenu supporte le HTML brut. Balises recommandées : &lt;p&gt;, &lt;h3&gt;, &lt;strong&gt;, &lt;em&gt;, &lt;a&gt;, &lt;img&gt;, &lt;ul&gt;/&lt;li&gt;.</p>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:14px">
+          <button class="sm-btn primary" id="save-btn">Publier</button>
+          <button class="sm-btn" id="cancel-btn">Annuler</button>
+        </div>
+        <input type="hidden" id="ed-id" />
+      </div>
+
+      <!-- Liste des articles publiés -->
+      <div class="post-list-admin" id="admin-posts"></div>
+
+    </div>
+  </section>
+
+  <!-- Scripts : admin.js gère l'auth et le CRUD, app.js gère le menu mobile -->
+  <script src="admin.js"></script>
+  <script>
+    /* ---- Logique du dashboard (branche admin.js) ---- */
+    (function(){
+      const $ = id => document.getElementById(id);
+      const loginView = $('login-view'), dashboard = $('dashboard');
+      const editor = $('editor'), adminPosts = $('admin-posts');
+
+      function route() {
+        if (isLoggedIn()) { loginView.style.display='none'; dashboard.style.display='block'; renderList(); }
+        else { loginView.style.display='block'; dashboard.style.display='none'; }
+      }
+
+      $('login-btn').onclick = async () => {
+        const ok = await tryLogin($('pwd').value);
+        if (ok) { route(); } else { $('login-err').style.display='block'; $('pwd').value=''; }
+      };
+      $('pwd').onkeydown = e => { if(e.key==='Enter') $('login-btn').click(); };
+      $('logout-btn').onclick = logout;
+
+      $('new-btn').onclick = () => { $('ed-id').value=''; $('ed-title').value=''; $('ed-content').value=''; editor.style.display='block'; $('ed-title').focus(); };
+      $('cancel-btn').onclick = () => { editor.style.display='none'; };
+      $('save-btn').onclick = () => {
+        const title = $('ed-title').value.trim();
+        const content = $('ed-content').value.trim();
+        if (!title) { $('ed-title').focus(); return; }
+        const id = $('ed-id').value;
+        if (id) { updatePost(id, { title, content }); }
+        else { addPost({ title, content }); }
+        editor.style.display='none';
+        renderList();
+      };
+
+      function renderList() {
+        const posts = getPosts();
+        if (!posts.length) { adminPosts.innerHTML='<p class="empty">// aucun article — clique sur "+ Nouvel article"</p>'; return; }
+        adminPosts.innerHTML = posts.map(p => {
+          const d = new Date(p.created).toLocaleDateString('fr-FR',{day:'2-digit',month:'short',year:'numeric'});
+          return '<div class="post-item"><div class="info"><h4>'+esc(p.title)+'</h4><p>'+d+'</p></div>'
+            +'<div class="actions"><a class="sm-btn" href="article.html?id='+p.id+'" target="_blank">Voir</a>'
+            +'<button class="sm-btn" onclick="editPost(\''+p.id+'\')">Éditer</button>'
+            +'<button class="sm-btn danger" onclick="delPost(\''+p.id+'\')">Supprimer</button></div></div>';
+        }).join('');
+      }
+
+      window.editPost = (id) => {
+        const p = getPost(id); if(!p) return;
+        $('ed-id').value = p.id; $('ed-title').value = p.title; $('ed-content').value = p.content || '';
+        editor.style.display='block'; $('ed-title').focus();
+      };
+      window.delPost = (id) => { if (!confirm('Supprimer cet article ?')) return; deletePost(id); renderList(); };
+
+      route();
+    })();
+  </script>
+  <script src="app.js"></script>
+</body>
+</html>

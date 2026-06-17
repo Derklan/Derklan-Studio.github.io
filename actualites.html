@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>Devlog — STUDIO</title>
+</head>
+<body>
+
+  <!-- ======================== NAVIGATION ======================== -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="brand">
+        <!-- MODIFIER : Logo + Nom -->
+        <span class="logo-mark"></span>
+        <a href="index.html"><b>STUDIO</b></a>
+      </div>
+      <div class="nav-links">
+        <a href="jeux.html">JEUX</a>
+        <a href="studio.html">STUDIO</a>
+        <a href="actualites.html" class="active">DEVLOG</a>
+        <a href="presse.html">PRESSE</a>
+      </div>
+      <a class="nav-cta" href="contact.html">CONTACT</a>
+    </div>
+  </nav>
+
+  <!-- ======================== HERO ======================== -->
+  <header class="page-hero">
+    <div class="glow" aria-hidden="true"></div>
+    <p class="eyebrow">// console.log()</p>
+    <!-- MODIFIER : Titre du devlog -->
+    <h1>Les <span class="grad-text">coulisses</span>.</h1>
+    <!-- MODIFIER : Sous-titre -->
+    <p class="sub">Mises à jour, notes de production et coups de gueule occasionnels.</p>
+  </header>
+
+  <!-- ======================== LISTE DES ARTICLES (rendu dynamique par admin.js) ======================== -->
+  <!-- Les articles sont chargés depuis localStorage via admin.js -->
+  <!-- Pour poster un article : va sur admin.html, connecte-toi, et clique "+ Nouvel article" -->
+  <section class="section" style="padding-top:20px">
+    <div class="wrap">
+      <div class="post-list" id="devlog-posts">
+        <p style="text-align:center;color:var(--muted);font-family:var(--mono);padding:60px 0">// chargement...</p>
+      </div>
+
+      <!-- Lien admin discret en bas de page -->
+      <div style="text-align:center;margin-top:48px">
+        <a class="btn-link" href="admin.html" style="font-size:12px;color:var(--muted)">// admin</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== FOOTER ======================== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>
+        <div class="brand"><span class="logo-mark"></span><b>STUDIO</b></div>
+        <p class="blurb">Studio de jeux indépendant.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col"><h5>// STUDIO</h5><a href="jeux.html">Jeux</a><a href="studio.html">Le studio</a><a href="actualites.html">Devlog</a></div>
+        <div class="footer-col"><h5>// SUIVRE</h5><a href="#">Steam</a><a href="#">itch.io</a><a href="#">Discord</a><a href="#">X</a></div>
+        <div class="footer-col"><h5>// CONTACT</h5><a href="presse.html">Presse</a><a href="contact.html">Jobs</a><a href="mailto:hello@studio.com">hello@studio.com</a></div>
+      </div>
+    </div>
+    <div class="copyright">© <span id="year">2026</span> STUDIO — tous droits réservés.</div>
+  </footer>
+
+  <!-- admin.js DOIT être chargé AVANT app.js (il rend les posts) -->
+  <script src="admin.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

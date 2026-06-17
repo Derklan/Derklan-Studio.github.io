@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Le titre est mis à jour dynamiquement par admin.js -->
+  <title>Article — STUDIO</title>
+  <style>
+    /* Largeur de lecture confortable pour les articles */
+    .article-wrap { max-width: 720px; margin: 0 auto; }
+  </style>
+</head>
+<body>
+
+  <!-- ======================== NAVIGATION ======================== -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="brand">
+        <!-- MODIFIER : Logo + Nom -->
+        <span class="logo-mark"></span>
+        <a href="index.html"><b>STUDIO</b></a>
+      </div>
+      <div class="nav-links">
+        <a href="jeux.html">JEUX</a>
+        <a href="studio.html">STUDIO</a>
+        <a href="actualites.html" class="active">DEVLOG</a>
+        <a href="presse.html">PRESSE</a>
+      </div>
+      <a class="nav-cta" href="contact.html">CONTACT</a>
+    </div>
+  </nav>
+
+  <!-- ======================== CONTENU ARTICLE (rendu dynamique) ======================== -->
+  <!-- Le contenu est injecté par admin.js selon le paramètre ?id= dans l'URL -->
+  <section class="section" style="padding-top:110px">
+    <div class="article-wrap" id="article-content">
+      <p style="text-align:center;color:var(--muted);font-family:var(--mono);padding:60px 0">// chargement...</p>
+    </div>
+  </section>
+
+  <!-- ======================== FOOTER ======================== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>
+        <div class="brand"><span class="logo-mark"></span><b>STUDIO</b></div>
+        <p class="blurb">Studio de jeux indépendant.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col"><h5>// STUDIO</h5><a href="jeux.html">Jeux</a><a href="studio.html">Le studio</a><a href="actualites.html">Devlog</a></div>
+        <div class="footer-col"><h5>// SUIVRE</h5><a href="#">Steam</a><a href="#">itch.io</a><a href="#">Discord</a><a href="#">X</a></div>
+        <div class="footer-col"><h5>// CONTACT</h5><a href="presse.html">Presse</a><a href="contact.html">Jobs</a><a href="mailto:hello@studio.com">hello@studio.com</a></div>
+      </div>
+    </div>
+    <div class="copyright">© <span id="year">2026</span> STUDIO — tous droits réservés.</div>
+  </footer>
+
+  <script src="admin.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

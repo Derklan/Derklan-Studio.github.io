@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+  <!-- MODIFIER : Titre de la page -->
+  <title>Studio — STUDIO</title>
+</head>
+<body>
+
+  <!-- ======================== NAVIGATION ======================== -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="brand">
+        <!-- MODIFIER : Logo -->
+        <span class="logo-mark"></span>
+        <!-- MODIFIER : Nom du studio -->
+        <a href="index.html"><b>STUDIO</b></a>
+      </div>
+      <div class="nav-links">
+        <a href="jeux.html">JEUX</a>
+        <a href="studio.html" class="active">STUDIO</a>
+        <a href="actualites.html">DEVLOG</a>
+        <a href="presse.html">PRESSE</a>
+      </div>
+      <a class="nav-cta" href="contact.html">CONTACT</a>
+    </div>
+  </nav>
+
+  <!-- ======================== HERO PAGE ======================== -->
+  <header class="page-hero">
+    <div class="glow" aria-hidden="true"></div>
+    <p class="eyebrow">// about()</p>
+    <!-- MODIFIER : Titre -->
+    <h1>Petit studio. <span class="grad-text">Grandes obsessions.</span></h1>
+    <!-- MODIFIER : Sous-titre -->
+    <p class="sub">Quelques personnes, une exigence commune : ne sortir que des jeux qu'on aurait envie de jouer nous-mêmes.</p>
+  </header>
+
+  <!-- ======================== MANIFESTE ======================== -->
+  <section class="section">
+    <div class="wrap manifesto reveal">
+      <!-- MODIFIER : Titre du manifeste -->
+      <h2>On a commencé pour faire les jeux qui nous manquaient.</h2>
+      <!-- MODIFIER : Texte du manifeste (histoire du studio) -->
+      <p>Raconte ici l'origine du studio : pourquoi il existe, ce qui vous réunit, ce que vous refusez de faire. Court et sincère.</p>
+      <!-- CTA vers la page fondateurs -->
+      <div style="margin-top:36px">
+        <a class="btn-primary" href="fondateurs.html">RENCONTRER LES FONDATEURS</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== ÉQUIPE ======================== -->
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
+      <div class="head center reveal">
+        <p class="label">// team.members()</p>
+        <h2>L'équipe</h2>
+      </div>
+      <div class="team">
+
+        <!-- MODIFIER : Membre 1 — photo (.avatar), nom, rôle -->
+        <div class="member reveal">
+          <!-- MODIFIER : Photo — remplace .avatar par style="background-image:url(img/membre1.jpg);background-size:cover" -->
+          <div class="avatar"></div>
+          <h4>Prénom Nom</h4>
+          <p>Game Director</p>
+        </div>
+
+        <!-- MODIFIER : Membre 2 -->
+        <div class="member reveal">
+          <div class="avatar"></div>
+          <h4>Prénom Nom</h4>
+          <p>Lead Programmer</p>
+        </div>
+
+        <!-- MODIFIER : Membre 3 -->
+        <div class="member reveal">
+          <div class="avatar"></div>
+          <h4>Prénom Nom</h4>
+          <p>Art Director</p>
+        </div>
+
+        <!-- MODIFIER : Membre 4 -->
+        <div class="member reveal">
+          <div class="avatar"></div>
+          <h4>Prénom Nom</h4>
+          <p>Sound Design</p>
+        </div>
+
+        <!-- AJOUTER : Copie un bloc <div class="member"> pour ajouter un membre -->
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== VALEURS ======================== -->
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
+      <div class="head center reveal">
+        <p class="label">// core.values()</p>
+        <h2>Ce qui compte</h2>
+      </div>
+      <div class="values">
+
+        <!-- MODIFIER : Valeur 1 — titre et texte -->
+        <div class="value reveal">
+          <p class="num mono">01</p>
+          <h3>Le détail d'abord</h3>
+          <p>On préfère un jeu plus petit mais sans angle mort.</p>
+        </div>
+
+        <!-- MODIFIER : Valeur 2 -->
+        <div class="value reveal">
+          <p class="num mono">02</p>
+          <h3>Indépendance</h3>
+          <p>Personne pour nous dire quoi faire. Non négociable.</p>
+        </div>
+
+        <!-- MODIFIER : Valeur 3 -->
+        <div class="value reveal">
+          <p class="num mono">03</p>
+          <h3>Joueur avant tout</h3>
+          <p>On conçoit pour l'expérience, pas pour la roadmap.</p>
+        </div>
+
+        <!-- AJOUTER : Copie un bloc <div class="value"> pour une valeur en plus -->
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== BLOC IDE : STACK TECHNIQUE ======================== -->
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
+      <p class="label reveal">// stack.ts</p>
+      <div class="head reveal">
+        <h2>Notre stack</h2>
+        <p>Les outils avec lesquels on fabrique tout ça.</p>
+      </div>
+      <div class="ide reveal">
+        <div class="ide-bar">
+          <div class="dots"><i></i><i></i><i></i></div>
+          <span class="ide-tab"><b>stack</b>.ts</span>
+        </div>
+        <div class="ide-body">
+          <div class="gutter mono">
+            <span>1</span><span>2</span><span>3</span><span>4</span>
+            <span>5</span><span>6</span><span>7</span><span>8</span>
+          </div>
+          <div class="code-block">
+            <!-- MODIFIER : Tout le contenu du bloc de code (votre stack) -->
+            <div class="ln"><span class="c-kw">export const</span> <span class="c-prop">STACK</span> = {</div>
+            <div class="ln">  <span class="c-prop">engine</span>:    <span class="c-str">"Unity"</span>,</div>
+            <div class="ln">  <span class="c-prop">lang</span>:      [<span class="c-str">"C#"</span>, <span class="c-str">"TypeScript"</span>],</div>
+            <div class="ln">  <span class="c-prop">xr</span>:        <span class="c-str">"Meta XR SDK · OpenXR"</span>,</div>
+            <div class="ln">  <span class="c-prop">ci</span>:        <span class="c-str">"GitHub Actions · GameCI"</span>,</div>
+            <div class="ln">  <span class="c-prop">art</span>:       <span class="c-str">"Blender · Substance"</span>,</div>
+            <div class="ln">  <span class="c-prop">audio</span>:     <span class="c-str">"FMOD · Reaper"</span>,</div>
+            <div class="ln">}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== MANIFESTE MONUMENTAL ======================== -->
+  <section class="mono-block">
+    <!-- MODIFIER : Texte monumental -->
+    <h2 class="reveal">On code.<br/>On crée.<br/><span class="grad-text">On recommence.</span></h2>
+  </section>
+
+  <!-- ======================== FOOTER ======================== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>
+        <div class="brand"><span class="logo-mark"></span><b>STUDIO</b></div>
+        <p class="blurb">Studio de jeux indépendant.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col"><h5>// STUDIO</h5><a href="jeux.html">Jeux</a><a href="studio.html">Le studio</a><a href="actualites.html">Devlog</a></div>
+        <div class="footer-col"><h5>// SUIVRE</h5><a href="#">Steam</a><a href="#">itch.io</a><a href="#">Discord</a><a href="#">X</a></div>
+        <div class="footer-col"><h5>// CONTACT</h5><a href="presse.html">Presse</a><a href="contact.html">Jobs</a><a href="mailto:hello@studio.com">hello@studio.com</a></div>
+      </div>
+    </div>
+    <div class="copyright">© <span id="year">2026</span> STUDIO — tous droits réservés.</div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
