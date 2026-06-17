@@ -306,8 +306,10 @@ body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
 .copyright{font-family:var(--mono);max-width:var(--maxw);margin:46px auto 0;padding-top:24px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
 
 /* ---------- REVEAL ---------- */
-.reveal{opacity:0;transform:translateY(30px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
-.reveal.in{opacity:1;transform:none}
+/* Les éléments .reveal ne sont cachés QUE si le JS a chargé (classe .js sur <html>).
+   Sans JS → tout est visible par défaut. Pas de contenu invisible. */
+.js .reveal{opacity:0;transform:translateY(30px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.js .reveal.in, .reveal.in{opacity:1;transform:none}
 .hero .eyebrow,.hero h1,.hero .sub,.hero-actions{opacity:0;transform:translateY(24px);animation:rise 1s var(--ease) forwards}
 .hero h1{animation-delay:.08s}.hero .sub{animation-delay:.2s}.hero-actions{animation-delay:.32s}
 @keyframes rise{to{opacity:1;transform:none}}
@@ -330,7 +332,8 @@ body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
 }
 
 @media(prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}
+  html{scroll-behavior:auto}
+  .js .reveal{opacity:1;transform:none;transition:none}
   .hero .eyebrow,.hero h1,.hero .sub,.hero-actions{animation:none;opacity:1;transform:none}
   *{transition:none!important}
 }
