@@ -1,8 +1,59 @@
 // ============ STUDIO — JS partagé (fusion) ============
 
+// ====================================================================
+// MODIFIER : Active/désactive la modal "Work in Progress" PAGE PAR PAGE
+// true  = la modal s'affiche sur cette page
+// false = la page est accessible normalement
+//
+// Le nom correspond au fichier HTML (sans le .html)
+// Ajoute une ligne si tu crées une nouvelle page
+const WIP = {
+  'index':       false,
+  'jeux':        true,
+  'jeu':         true,
+  'studio':      true,
+  'fondateurs':  true,
+  'actualites':  true,
+  'article':     true,
+  'presse':      true,
+  'contact':     true,
+  'admin':       false,   // admin toujours accessible
+  '404':         false,   // 404 toujours accessible
+};
+// ====================================================================
+
 // Signale au CSS que le JS est chargé → active les animations reveal
-// (sans JS, le CSS n'applique pas opacity:0 → contenu toujours visible)
 document.documentElement.classList.add('js');
+
+// ============ Modal Work in Progress ============
+(function () {
+  // Détecte la page courante depuis le nom du fichier
+  const path = location.pathname.split('/').pop().replace('.html', '') || 'index';
+  const showWip = WIP[path] === true;
+
+  if (!showWip) return;
+
+  const overlay = document.createElement('div');
+  overlay.id = 'wip-overlay';
+  overlay.innerHTML = `
+    <div class="wip-box">
+      <div class="wip-dots"><i></i><i></i><i></i></div>
+      <p class="wip-label">// status</p>
+      <h2 class="wip-title">Work in <span>Progress</span></h2>
+      <p class="wip-sub">Ce site est en cours de construction.<br>Revenez bientôt.</p>
+      <div class="wip-bar"><div class="wip-fill"></div></div>
+      <button class="wip-btn" id="wip-close">ENTRER QUAND MÊME</button>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+  document.body.style.overflow = 'hidden';
+
+  document.getElementById('wip-close').onclick = function () {
+    overlay.style.opacity = '0';
+    document.body.style.overflow = '';
+    setTimeout(function () { overlay.remove(); }, 400);
+  };
+})();
 
 (function () {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
