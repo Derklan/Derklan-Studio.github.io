@@ -12,9 +12,13 @@
 // ======================== NAVIGATION ========================
 // MODIFIER : Logo, nom du studio, liens de navigation
 
-function renderHeader() {
-  const page = document.body.dataset.page || '';
-  const nav = `
+(function() {
+
+  var page = document.body.getAttribute('data-page') || '';
+
+  var header = document.getElementById('header');
+  if (header) {
+    header.innerHTML = `
     <nav class="nav">
       <div class="nav-inner">
         <div class="brand">
@@ -33,16 +37,15 @@ function renderHeader() {
       </div>
     </nav>
   `;
-  const el = document.getElementById('header');
-  if (el) el.innerHTML = nav;
 }
 
 
 // ======================== FOOTER ========================
 // MODIFIER : Logo, nom, description, liens, emails
 
-function renderFooter() {
-  const footer = `
+var footer = document.getElementById('footer');
+  if (footer) {
+    footer.innerHTML = `
     <footer class="footer">
       <div class="footer-inner">
         <div>
@@ -85,20 +88,11 @@ function renderFooter() {
         </div>
       </div>
       <!-- MODIFIER : Nom du studio dans le copyright -->
-      <div class="copyright">© <span id="year"></span> DERKLAN-STUDIO — tous droits réservés.</div>
+      <div class="copyright">©  2026 DERKLAN-STUDIO - tous droits réservés.</div>
     </footer>
   `;
-  const el = document.getElementById('footer');
-  if (el) el.innerHTML = footer;
-
-  // Année auto
-  const y = document.getElementById('year');
-  if (y) y.textContent = new Date().getFullYear();
 }
 
 
 // ======================== INIT ========================
-document.addEventListener('DOMContentLoaded', () => {
-  renderHeader();
-  renderFooter();
-});
+})();
