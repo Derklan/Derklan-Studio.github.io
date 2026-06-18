@@ -52,24 +52,7 @@
 <body>
 
   <!-- ======================== NAVIGATION ======================== -->
-  <nav class="nav">
-    <div class="nav-inner">
-      <div class="brand">
-        <!-- MODIFIER : Logo -->
-        <span class="logo-mark"></span>
-        <!-- MODIFIER : Nom du studio -->
-        <a href="index.html"><b>STUDIO</b></a>
-      </div>
-      <div class="nav-links">
-        <a href="jeux.html">JEUX</a>
-        <a href="studio.html" class="active">STUDIO</a>
-        <a href="actualites.html">DEVLOG</a>
-        <a href="presse.html">PRESSE</a>
-      </div>
-      <a class="nav-cta" href="contact.html">CONTACT</a>
-    </div>
-  </nav>
-
+  <div id="header"></div>
   <!-- ======================== HERO FONDATEURS ======================== -->
   <header class="founders-hero">
     <div class="hero-bg"></div>
@@ -98,11 +81,10 @@
           <!-- MODIFIER : Rôle -->
           <p class="role">Co-founder · CEO</p>
           <!-- MODIFIER : Bio courte (2-3 lignes) -->
-          <p class="bio">Deux ou trois lignes sur cette personne : son parcours, ce qu'elle apporte au studio, sa spécialité, ce qui la fait avancer.</p>
+          <p class="bio"></p>Charly, c'est notre expert en architecture ; sans lui, le projet n'a pas de structure. Très méticuleux, il cherche la manière de développer la plus optimisée.</p>
           <!-- MODIFIER : Liens sociaux -->
           <div class="socials">
             <a href="#">LinkedIn</a>
-            <a href="#">X</a>
             <a href="#">GitHub</a>
           </div>
         </div>
@@ -120,7 +102,7 @@
           <!-- MODIFIER : Rôle -->
           <p class="role">Co-founder · CEO</p>
           <!-- MODIFIER : Bio courte -->
-          <p class="bio">Deux ou trois lignes sur cette personne : son parcours, ce qu'elle apporte au studio, sa spécialité, ce qui la fait avancer.</p>
+          <p class="bio">Mathys, c'est le spécialiste IA ; il adore créer des comportements. Sans lui, les IA sont à la cueillette aux champignons. il aime optimiser et créer du gameplay.</p>
           <!-- MODIFIER : Liens sociaux -->
           <div class="socials">
             <a href="#">LinkedIn</a>
@@ -138,7 +120,7 @@
   <!-- ======================== CITATION ======================== -->
   <section class="quote-section">
     <!-- MODIFIER : Citation des fondateurs -->
-    <p class="quote reveal">On a pas commencé pour devenir un studio. On a commencé parce qu'on pouvait pas s'en empêcher.</p>
+    <p class="quote reveal">Au début, c'étaient juste deux amis, deux PC et plein d'idées.</p>
     <!-- MODIFIER : Attribution -->
     <p class="quote-attr reveal">— Les fondateurs</p>
   </section>
@@ -162,19 +144,19 @@
             <div class="ln"></div>
             <!-- MODIFIER : Bloc fondateur 1 — nom, rôle, skills, fuel -->
             <div class="ln"><span class="c-kw">export const</span> <span class="c-prop">FOUNDER_1</span> = {</div>
-            <div class="ln">  <span class="c-prop">name</span>:     <span class="c-str">"Prénom Nom"</span>,</div>
+            <div class="ln">  <span class="c-prop">name</span>:     <span class="c-str">"Charly Boy"</span>,</div>
             <div class="ln">  <span class="c-prop">role</span>:     <span class="c-str">"Co-founder · CEO"</span>,</div>
-            <div class="ln">  <span class="c-prop">skills</span>:   [<span class="c-str">"Game Dev"</span>, <span class="c-str">"C#"</span>, <span class="c-str">"Unity"</span>, <span class="c-str">"VR"</span>],</div>
-            <div class="ln">  <span class="c-prop">fuel</span>:     <span class="c-str">"la passion et le café"</span>,</div>
+            <div class="ln">  <span class="c-prop">skills</span>:   [<span class="c-str">"Game Dev"</span>, <span class="c-str">"C++/C#/Blueprint"</span>, <span class="c-str">"Unity/Unreal Engine"</span>, <span class="c-str">"PC/VR"</span>],</div>
+            <div class="ln">  <span class="c-prop">fuel</span>:     <span class="c-str">"l'ambition et les nuits blanches"</span>,</div>
             <div class="ln">  <span class="c-prop">quit</span>:     <span class="c-kw">never</span>,</div>
             <div class="ln">}</div>
             <div class="ln"></div>
             <!-- MODIFIER : Bloc fondateur 2 — nom, rôle, skills, fuel -->
             <div class="ln"><span class="c-kw">export const</span> <span class="c-prop">FOUNDER_2</span> = {</div>
-            <div class="ln">  <span class="c-prop">name</span>:     <span class="c-str">"Prénom Nom"</span>,</div>
+            <div class="ln">  <span class="c-prop">name</span>:     <span class="c-str">"Mathys Le Juez"</span>,</div>
             <div class="ln">  <span class="c-prop">role</span>:     <span class="c-str">"Co-founder · CEO"</span>,</div>
-            <div class="ln">  <span class="c-prop">skills</span>:   [<span class="c-str">"Game Design"</span>, <span class="c-str">"Art"</span>, <span class="c-str">"Vision"</span>],</div>
-            <div class="ln">  <span class="c-prop">fuel</span>:     <span class="c-str">"l'ambition et les nuits blanches"</span>,</div>
+            <div class="ln">  <span class="c-prop">skills</span>:   <span class="c-str">"C++/C#/Blueprint"</span>, <span class="c-str">"Unity/Unreal Engine"</span>, <span class="c-str">"PC/VR"</span>],</div>
+            <div class="ln">  <span class="c-prop">fuel</span>:     <span class="c-str">"la passion et le café"</span>,</div>
             <div class="ln">  <span class="c-prop">quit</span>:     <span class="c-kw">never</span>,</div>
             <div class="ln">}</div>
             <div class="ln"></div>
@@ -195,21 +177,8 @@
   </section>
 
   <!-- ======================== FOOTER ======================== -->
-  <footer class="footer">
-    <div class="footer-inner">
-      <div>
-        <div class="brand"><span class="logo-mark"></span><b>STUDIO</b></div>
-        <p class="blurb">Studio de jeux indépendant.</p>
-      </div>
-      <div class="footer-cols">
-        <div class="footer-col"><h5>// STUDIO</h5><a href="jeux.html">Jeux</a><a href="studio.html">Le studio</a><a href="actualites.html">Devlog</a></div>
-        <div class="footer-col"><h5>// SUIVRE</h5><a href="#">Steam</a><a href="#">itch.io</a><a href="#">Discord</a><a href="#">X</a></div>
-        <div class="footer-col"><h5>// CONTACT</h5><a href="presse.html">Presse</a><a href="contact.html">Jobs</a><a href="mailto:hello@studio.com">hello@studio.com</a></div>
-      </div>
-    </div>
-    <div class="copyright">© <span id="year">2026</span> STUDIO — tous droits réservés.</div>
-  </footer>
-
+   <div id="footer"></div>
+ <script src="components.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
