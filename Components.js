@@ -10,7 +10,7 @@
   // Charge le header
   var headerEl = document.getElementById('header');
   if (headerEl) {
-    fetch('header.html')
+    fetch('./header.html')
       .then(function(r) { return r.text(); })
       .then(function(html) {
         headerEl.innerHTML = html;
@@ -31,7 +31,7 @@
   // Charge le footer
   var footerEl = document.getElementById('footer');
   if (footerEl) {
-    fetch('footer.html')
+    fetch('./footer.html')
       .then(function(r) { return r.text(); })
       .then(function(html) {
         footerEl.innerHTML = html;
