@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="/assets/css/styles.css" />
+  <link rel="icon" href="{{ site.baseurl }}/assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/styles.css" />
   <title>{{ page.title }} — {{ site.title }}</title>
 </head>
 <body data-page="{{ page.active }}">
@@ -15,9 +15,9 @@
 
   {% include footer.html %}
 
-  <script src="/assets/js/app.js"></script>
+  <script src="{{ site.baseurl }}/assets/js/app.js"></script>
   {% if page.admin %}
-  <script src="/assets/js/admin.js"></script>
+  <script src="{{ site.baseurl }}/assets/js/admin.js"></script>
   {% endif %}
 </body>
 </html>

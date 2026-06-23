@@ -1,6 +1,6 @@
 # MODIFIER : Configuration du site
-title: DERKLAN-STUDIO
+title: STUDIO
 description: Studio de jeux indépendant
-url: "https://derklan.github.io/Derklan-Studio.github.io/"
+url: "https://derklan-studio.github.io"
 baseurl: ""
 exclude: [README.md, LICENSE]
