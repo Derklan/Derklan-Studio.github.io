@@ -1,17 +1,11 @@
----
-// MODIFIER : Logo, nom, liens, emails
-const year = new Date().getFullYear();
----
+<!-- MODIFIER : Logo, nom, liens, emails -->
 <footer class="footer">
   <div class="footer-inner">
     <div>
       <div class="brand">
-        <!-- MODIFIER : Logo -->
         <span class="logo-mark"></span>
-        <!-- MODIFIER : Nom du studio -->
         <b>STUDIO</b>
       </div>
-      <!-- MODIFIER : Description -->
       <p class="blurb">Studio de jeux indépendant. On crée des mondes qu'on n'a pas envie de quitter.</p>
     </div>
     <div class="footer-cols">
@@ -29,7 +23,6 @@ const year = new Date().getFullYear();
         <a href="#">itch.io</a>
         <a href="#">Discord</a>
         <a href="#">X</a>
-        <a href="#">YouTube</a>
       </div>
       <div class="footer-col">
         <h5>// CONTACT</h5>
@@ -40,6 +33,5 @@ const year = new Date().getFullYear();
       </div>
     </div>
   </div>
-  <!-- MODIFIER : Nom du studio -->
-  <div class="copyright">© {year} STUDIO — tous droits réservés.</div>
+  <div class="copyright">&copy; {{ 'now' | date: '%Y' }} STUDIO — tous droits réservés.</div>
 </footer>

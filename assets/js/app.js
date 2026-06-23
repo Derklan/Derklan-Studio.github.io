@@ -1,9 +1,6 @@
-// STUDIO — JS client (Astro)
-var WIP = {
-  'index': true, 'jeux': true, 'jeu': true, 'studio': true,
-  'fondateurs': true, 'actualites': true, 'article': true,
-  'presse': true, 'contact': true, 'admin': false, '404': false,
-};
+// STUDIO — JS client
+// MODIFIER : WIP modal par page (true = activée)
+var WIP={'index':true,'jeux':true,'jeu':true,'studio':true,'fondateurs':true,'actualites':true,'article':true,'presse':true,'contact':true,'admin':false,'404':false};
 document.documentElement.classList.add('js');
 (function(){var p=document.body.getAttribute('data-page')||'';if(WIP[p]!==true)return;var o=document.createElement('div');o.id='wip-overlay';o.innerHTML='<div class="wip-box"><div class="wip-dots"><i></i><i></i><i></i></div><p class="wip-label">// status</p><h2 class="wip-title">Work in <span>Progress</span></h2><p class="wip-sub">Ce site est en cours de construction.<br>Revenez bientôt.</p><div class="wip-bar"><div class="wip-fill"></div></div><button class="wip-btn" id="wip-close">ENTRER QUAND MÊME</button></div>';document.body.appendChild(o);document.body.style.overflow='hidden';document.getElementById('wip-close').onclick=function(){o.style.opacity='0';document.body.style.overflow='';setTimeout(function(){o.remove();},400);};})();
 (function(){var r=matchMedia('(prefers-reduced-motion: reduce)').matches;if(!r&&'IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0.14});document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});}else{document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in');});}})();

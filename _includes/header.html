@@ -1,0 +1,18 @@
+<!-- MODIFIER : Logo, nom du studio, liens -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="brand">
+      <!-- MODIFIER : Logo — remplace le span par <img src="/assets/logo.svg" class="logo-mark" alt="Logo"> -->
+      <span class="logo-mark"></span>
+      <!-- MODIFIER : Nom du studio -->
+      <a href="/"><b>STUDIO</b></a>
+    </div>
+    <div class="nav-links">
+      <a href="/jeux" {% if page.active == 'jeux' %}class="active"{% endif %}>JEUX</a>
+      <a href="/studio" {% if page.active == 'studio' %}class="active"{% endif %}>STUDIO</a>
+      <a href="/actualites" {% if page.active == 'actualites' %}class="active"{% endif %}>DEVLOG</a>
+      <a href="/presse" {% if page.active == 'presse' %}class="active"{% endif %}>PRESSE</a>
+    </div>
+    <a class="nav-cta" href="/contact">CONTACT</a>
+  </div>
+</nav>
