@@ -649,3 +649,32 @@ body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
   transition: background .25s;
 }
 .carousel-dot.active { background: var(--g2); }
+
+/* ============================================================
+   AJOUT — cartes jeu avec image de couverture (catalogue)
+   À coller à la FIN de styles.css.
+   Scopé via [style*="background-image"] : ne s'applique QUE
+   aux cartes qui ont une vraie image. Tes .a1….a6 et le reste
+   ne sont pas affectés.
+   ============================================================ */
+.card{overflow:hidden}
+
+.card .art[style*="background-image"]{
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  position:relative;
+  transition:transform .5s ease;
+}
+
+/* léger zoom au survol — effet key-art */
+.card:hover .art[style*="background-image"]{transform:scale(1.05)}
+
+/* fondu bas pour la transition vers le .body */
+.card .art[style*="background-image"]::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(transparent 55%, rgba(10,10,12,.6));
+}

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Admin — STUDIO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<!-- Si t'as styles.css global, décommente et tu peux virer le <style> -->
+<!-- <link rel="stylesheet" href="styles.css" /> -->
+<style>
+  :root{
+    --bg:#0a0a0c; --bg2:#111114; --card:#141418; --line:#26262d;
+    --txt:#ededf2; --muted:#8a8a93;
+    --magenta:#ff2e7e; --violet:#b14bff; --orange:#ff7a3c;
+    --grad:linear-gradient(135deg,var(--magenta),var(--violet) 55%,var(--orange));
+    --sans:'Space Grotesk',system-ui,sans-serif; --mono:'JetBrains Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--txt);font-family:var(--sans);min-height:100vh;line-height:1.55}
+  .mono{font-family:var(--mono)} a{color:inherit;text-decoration:none}
+  .wrap{max-width:920px;margin:0 auto;padding:36px 24px 80px}
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;
+    border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(10,10,12,.85);
+    backdrop-filter:blur(12px);z-index:10}
+  .brand{font-weight:700;font-size:15px;letter-spacing:.5px}
+  .brand span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .topbar nav{display:flex;gap:18px;align-items:center}
+  .topbar .mono{font-size:12px;color:var(--muted)}
+  .btn{font-family:var(--mono);font-size:13px;font-weight:500;cursor:pointer;border:1px solid var(--line);
+    background:var(--bg2);color:var(--txt);padding:10px 18px;border-radius:10px;transition:.15s;
+    display:inline-flex;align-items:center;gap:8px}
+  .btn:hover{border-color:var(--violet)}
+  .btn-primary{background:var(--grad);border:none;color:#fff;font-weight:600}
+  .btn-primary:hover{filter:brightness(1.1)}
+  .btn-ghost{background:transparent}
+  .btn-danger{border-color:#ff3b5c40;color:#ff5a72}
+  .btn-danger:hover{border-color:#ff3b5c;background:#ff3b5c12}
+  .btn-link{font-family:var(--mono);font-size:13px;color:var(--muted);cursor:pointer}
+  .btn-link:hover{color:var(--violet)}
+  .login-box{max-width:380px;margin:12vh auto 0;text-align:center}
+  .login-box .lock{width:54px;height:54px;border-radius:14px;background:var(--grad);display:grid;place-items:center;margin:0 auto 22px}
+  .login-box h1{font-size:22px;margin-bottom:6px}
+  .login-box p{color:var(--muted);font-family:var(--mono);font-size:13px;margin-bottom:28px}
+  .field{margin-bottom:16px;text-align:left}
+  .field label{display:block;font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:7px}
+  .input{width:100%;background:var(--bg2);border:1px solid var(--line);color:var(--txt);font-family:var(--mono);
+    font-size:14px;padding:12px 14px;border-radius:10px;transition:.15s}
+  .input:focus{outline:none;border-color:var(--violet);box-shadow:0 0 0 3px #b14bff22}
+  textarea.input{resize:vertical;min-height:90px;line-height:1.6}
+  select.input{cursor:pointer}
+  .err{color:#ff5a72;font-family:var(--mono);font-size:12px;margin-top:10px;min-height:16px}
+  .tabs{display:flex;gap:8px;margin-bottom:30px;border-bottom:1px solid var(--line)}
+  .tab{font-family:var(--mono);font-size:13px;cursor:pointer;background:none;border:none;color:var(--muted);
+    padding:10px 16px;border-bottom:2px solid transparent;transition:.15s}
+  .tab:hover{color:var(--txt)}
+  .tab.active{color:var(--txt);border-bottom-color:var(--magenta)}
+  .head-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+  .head-row h1{font-size:24px}
+  .head-row h1 small{display:block;font-family:var(--mono);font-size:12px;color:var(--muted);font-weight:400;margin-top:4px}
+  .row-item{display:flex;align-items:center;justify-content:space-between;gap:16px;background:var(--card);
+    border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:12px}
+  .row-item .info{min-width:0}
+  .row-item .rtitle{font-weight:600;font-size:15px;display:flex;align-items:center;gap:8px}
+  .row-item .rmeta{font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:4px}
+  .row-item .actions{display:flex;gap:8px;flex-shrink:0}
+  .badge{font-family:var(--mono);font-size:11px;font-weight:600;padding:3px 9px;border-radius:6px;border:1px solid #888;color:#888}
+  .empty{text-align:center;color:var(--muted);font-family:var(--mono);padding:70px 0}
+  .editor h1{font-size:24px;margin-bottom:6px}
+  .editor .sub{font-family:var(--mono);font-size:13px;color:var(--muted);margin-bottom:30px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .section-label{font-family:var(--mono);font-size:11px;letter-spacing:1px;color:var(--violet);
+    text-transform:uppercase;margin:28px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  .hint{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:6px}
+  .repeat-row{display:grid;gap:10px;margin-bottom:10px;align-items:start}
+  .repeat-row.media{grid-template-columns:120px 1fr 1fr auto}
+  .repeat-row.spec{grid-template-columns:1fr 1.4fr auto}
+  .editor-actions{display:flex;gap:12px;margin-top:36px;padding-top:24px;border-top:1px solid var(--line)}
+  @media(max-width:640px){.grid2{grid-template-columns:1fr}.repeat-row.media,.repeat-row.spec{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="index.html"><span>DERKLAN</span> STUDIO</a>
+  <nav>
+    <span class="mono" id="session-status">// non connecté</span>
+    <button class="btn btn-ghost" id="logout-btn" style="display:none" onclick="logout()">Déconnexion</button>
+  </nav>
+</header>
+
+<main class="wrap" id="app"></main>
+
+<script src="admin.js"></script>
+<script src="games.js"></script>
+<script>
+(function(){
+  const app = document.getElementById('app');
+  const sessionStatus = document.getElementById('session-status');
+  const logoutBtn = document.getElementById('logout-btn');
+
+  function syncTopbar(){
+    const on = isLoggedIn();
+    sessionStatus.textContent = on ? '// connecté' : '// non connecté';
+    sessionStatus.style.color = on ? 'var(--magenta)' : 'var(--muted)';
+    logoutBtn.style.display = on ? 'inline-flex' : 'none';
+  }
+
+  function tabs(active){
+    return `<div class="tabs">
+      <button class="tab ${active==='devlog'?'active':''}" onclick="location.hash='#list'">Devlogs</button>
+      <button class="tab ${active==='games'?'active':''}" onclick="location.hash='#games'">Jeux</button>
+    </div>`;
+  }
+
+  // ---------- LOGIN ----------
+  function viewLogin(){
+    app.innerHTML = `
+      <div class="login-box">
+        <div class="lock"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+          <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+        <h1>Espace admin</h1><p>// authentification requise</p>
+        <div class="field"><label>Mot de passe</label>
+          <input class="input" type="password" id="pwd" placeholder="••••••••" autofocus /></div>
+        <button class="btn btn-primary" style="width:100%;justify-content:center" id="login-btn">Se connecter →</button>
+        <div class="err" id="login-err"></div>
+      </div>`;
+    const pwd = document.getElementById('pwd'), err = document.getElementById('login-err');
+    async function attempt(){
+      err.textContent = '';
+      if (await tryLogin(pwd.value)){ syncTopbar(); route(); }
+      else { err.textContent = 'Mot de passe incorrect.'; pwd.value=''; pwd.focus(); }
+    }
+    document.getElementById('login-btn').onclick = attempt;
+    pwd.onkeydown = e => { if (e.key === 'Enter') attempt(); };
+  }
+
+  // ========== DEVLOGS ==========
+  function viewDevlogList(){
+    const posts = getPosts();
+    let rows = posts.length === 0
+      ? '<div class="empty">// aucun devlog. Clique sur « Nouveau devlog ».</div>'
+      : posts.map(p => {
+          const st = (STATUS_MAP[p.status] || STATUS_MAP.alpha);
+          const d = new Date(p.created).toLocaleDateString('fr-FR',{day:'2-digit',month:'short',year:'numeric'});
+          return `<div class="row-item"><div class="info">
+            <div class="rtitle">${esc(p.project||'Sans titre')}
+              <span class="badge" style="border-color:${st.color};color:${st.color}">${st.label}</span></div>
+            <div class="rmeta">${d}${p.version?' · v'+esc(p.version):''}${p.engine?' · '+esc(p.engine):''}</div></div>
+            <div class="actions">
+              <a class="btn" href="article.html?id=${p.id}" target="_blank">Voir</a>
+              <button class="btn" onclick="location.hash='#edit/${p.id}'">Éditer</button>
+              <button class="btn btn-danger" data-del="${p.id}">Suppr.</button></div></div>`;
+        }).join('');
+    app.innerHTML = tabs('devlog') + `<div class="head-row">
+      <h1>Devlogs <small>// ${posts.length} article${posts.length>1?'s':''}</small></h1>
+      <button class="btn btn-primary" onclick="location.hash='#new'">+ Nouveau devlog</button></div>${rows}`;
+    app.querySelectorAll('[data-del]').forEach(b => b.onclick = () => {
+      if (confirm('Supprimer ce devlog ?')){ deletePost(b.dataset.del); route(); } });
+  }
+
+  function viewDevlogEditor(id){
+    const editing = !!id, p = editing ? getPost(id) : {};
+    if (editing && !p){ location.hash = '#list'; return route(); }
+    const statusOpts = Object.entries(STATUS_MAP).map(([k,v]) =>
+      `<option value="${k}" ${p.status===k?'selected':''}>${v.label} — ${v.desc}</option>`).join('');
+    let media = []; try { media = JSON.parse(p.media||'[]'); } catch(e){ media = []; }
+    if (!media.length) media = [{url:'',desc:''}];
+
+    app.innerHTML = `<div class="editor">
+      <a class="btn-link" onclick="location.hash='#list'">← retour aux devlogs</a>
+      <h1 style="margin-top:14px">${editing?'Éditer le devlog':'Nouveau devlog'}</h1>
+      <p class="sub">// ${editing?'modification de « '+esc(p.project||'')+' »':'nouvel article structuré'}</p>
+      <div class="section-label">Projet</div>
+      <div class="grid2">
+        <div class="field"><label>Nom du projet *</label><input class="input" id="d-project" value="${esc(p.project||'')}" /></div>
+        <div class="field"><label>Statut</label><select class="input" id="d-status">${statusOpts}</select></div>
+      </div>
+      <div class="field"><label>Pitch</label><input class="input" id="d-pitch" value="${esc(p.pitch||'')}" /></div>
+      <div class="grid2">
+        <div class="field"><label>Moteur</label><input class="input" id="d-engine" value="${esc(p.engine||'')}" /></div>
+        <div class="field"><label>Version</label><input class="input" id="d-version" value="${esc(p.version||'')}" /></div>
+      </div>
+      <div class="section-label">Contenu</div>
+      <div class="field"><label>Nouvelles fonctionnalités</label><textarea class="input" id="d-done">${esc(p.done||'')}</textarea><div class="hint">// une ligne = une puce</div></div>
+      <div class="field"><label>À venir</label><textarea class="input" id="d-next">${esc(p.next||'')}</textarea><div class="hint">// une ligne = une puce</div></div>
+      <div class="section-label">Médias</div><div id="d-media"></div>
+      <button class="btn btn-ghost" id="d-add-media" style="margin-top:6px">+ Ajouter un média</button>
+      <div class="editor-actions">
+        <button class="btn btn-primary" id="d-save">${editing?'Enregistrer':'Publier'}</button>
+        <button class="btn btn-ghost" onclick="location.hash='#list'">Annuler</button></div>
+      <div class="err" id="d-err"></div></div>`;
+
+    const list = document.getElementById('d-media');
+    function renderRows(){
+      list.innerHTML = media.map((m,i)=>`<div class="repeat-row media" style="grid-template-columns:1fr 1fr auto">
+        <input class="input" placeholder="URL image" data-u="${i}" value="${esc(m.url||'')}" />
+        <input class="input" placeholder="Légende" data-d="${i}" value="${esc(m.desc||'')}" />
+        <button class="btn btn-danger" data-rm="${i}">✕</button></div>`).join('');
+      list.querySelectorAll('[data-u]').forEach(el=>el.oninput=()=>media[el.dataset.u].url=el.value);
+      list.querySelectorAll('[data-d]').forEach(el=>el.oninput=()=>media[el.dataset.d].desc=el.value);
+      list.querySelectorAll('[data-rm]').forEach(el=>el.onclick=()=>{media.splice(+el.dataset.rm,1);if(!media.length)media.push({url:'',desc:''});renderRows();});
+    }
+    renderRows();
+    document.getElementById('d-add-media').onclick=()=>{media.push({url:'',desc:''});renderRows();};
+    document.getElementById('d-save').onclick=()=>{
+      const project=document.getElementById('d-project').value.trim();
+      if(!project){document.getElementById('d-err').textContent='Le nom du projet est obligatoire.';return;}
+      const data={project,
+        pitch:document.getElementById('d-pitch').value.trim(),
+        engine:document.getElementById('d-engine').value.trim(),
+        version:document.getElementById('d-version').value.trim(),
+        status:document.getElementById('d-status').value,
+        done:document.getElementById('d-done').value.trim(),
+        next:document.getElementById('d-next').value.trim(),
+        media:JSON.stringify(media.filter(m=>m.url&&m.url.trim()))};
+      if(editing)updatePost(id,data);else addPost(data);
+      location.hash='#list';route();
+    };
+  }
+
+  // ========== JEUX ==========
+  function viewGamesList(){
+    const games = getGames();
+    let rows = games.length === 0
+      ? '<div class="empty">// aucun jeu. Clique sur « Nouveau jeu ».</div>'
+      : games.map(g => {
+          const b = (GAME_BADGE[g.badge] || GAME_BADGE.dev);
+          const d = new Date(g.created).toLocaleDateString('fr-FR',{day:'2-digit',month:'short',year:'numeric'});
+          return `<div class="row-item"><div class="info">
+            <div class="rtitle">${gEsc(g.name||'Sans titre')}
+              <span class="badge" style="border-color:${b.color};color:${b.color}">${b.label}</span></div>
+            <div class="rmeta">${d}${g.genre?' · '+gEsc(g.genre):''}${g.featured?' · <span style="color:var(--magenta)">★ à la une</span>':''}</div></div>
+            <div class="actions">
+              <a class="btn" href="jeu.html?id=${g.id}" target="_blank">Voir</a>
+              <button class="btn" onclick="location.hash='#game-edit/${g.id}'">Éditer</button>
+              <button class="btn btn-danger" data-gdel="${g.id}">Suppr.</button></div></div>`;
+        }).join('');
+    app.innerHTML = tabs('games') + `<div class="head-row">
+      <h1>Jeux <small>// ${games.length} titre${games.length>1?'s':''}</small></h1>
+      <button class="btn btn-primary" onclick="location.hash='#game-new'">+ Nouveau jeu</button></div>${rows}`;
+    app.querySelectorAll('[data-gdel]').forEach(b => b.onclick = () => {
+      if (confirm('Supprimer ce jeu ?')){ deleteGame(b.dataset.gdel); route(); } });
+  }
+
+  function viewGameEditor(id){
+    const editing = !!id, g = editing ? getGame(id) : {};
+    if (editing && !g){ location.hash = '#games'; return route(); }
+    const badgeOpts = Object.entries(GAME_BADGE).map(([k,v]) =>
+      `<option value="${k}" ${g.badge===k?'selected':''}>${v.label}</option>`).join('');
+
+    let media = (g.media && g.media.length) ? g.media.slice() : [{type:'image',url:'',desc:''}];
+    let specs = (g.specs && g.specs.length) ? g.specs.slice() : [
+      {label:'Genre',value:''},{label:'Plateformes',value:''},{label:'Sortie',value:''},
+      {label:'Joueurs',value:''},{label:'Langues',value:''},{label:'Moteur',value:''}];
+
+    app.innerHTML = `<div class="editor">
+      <a class="btn-link" onclick="location.hash='#games'">← retour aux jeux</a>
+      <h1 style="margin-top:14px">${editing?'Éditer le jeu':'Nouveau jeu'}</h1>
+      <p class="sub">// ${editing?'modification de « '+gEsc(g.name||'')+' »':'fiche jeu + carte catalogue'}</p>
+
+      <div class="section-label">Identité (carte + hero)</div>
+      <div class="grid2">
+        <div class="field"><label>Nom du jeu *</label><input class="input" id="g-name" value="${gEsc(g.name||'')}" placeholder="Operation Blackout" /></div>
+        <div class="field"><label>Badge / statut</label><select class="input" id="g-badge">${badgeOpts}</select></div>
+      </div>
+      <div class="field"><label>Genre</label><input class="input" id="g-genre" value="${gEsc(g.genre||'')}" placeholder="action · aventure" /></div>
+      <div class="field"><label>Pitch (une ligne — carte + hero)</label><input class="input" id="g-pitch" value="${gEsc(g.pitch||'')}" placeholder="La phrase qui reste après le trailer." /></div>
+      <div class="field"><label>Image de couverture (URL — carte + fond hero)</label><input class="input" id="g-cover" value="${gEsc(g.cover||'')}" placeholder="img/jeu-hero.jpg" /></div>
+      <div class="field" style="display:flex;align-items:center;gap:10px">
+        <input type="checkbox" id="g-featured" ${g.featured?'checked':''} style="width:auto;cursor:pointer" />
+        <label for="g-featured" style="margin:0;cursor:pointer">Promouvoir sur l'accueil
+          <span style="color:var(--muted)">(3 max — 2 en haut, 1 en bas)</span></label>
+      </div>
+
+      <div class="section-label">Liens store</div>
+      <div class="grid2">
+        <div class="field"><label>Lien Steam / wishlist</label><input class="input" id="g-steam" value="${gEsc(g.steamUrl||'')}" placeholder="https://store.steampowered.com/..." /></div>
+        <div class="field"><label>Lien bande-annonce</label><input class="input" id="g-trailer" value="${gEsc(g.trailerUrl||'')}" placeholder="https://youtube.com/..." /></div>
+      </div>
+
+      <div class="section-label">Description</div>
+      <div class="field"><label>Paragraphes</label><textarea class="input" id="g-desc" style="min-height:120px">${gEsc(g.description||'')}</textarea><div class="hint">// une ligne = un paragraphe</div></div>
+      <div class="field"><label>Features</label><textarea class="input" id="g-feats">${gEsc(g.features||'')}</textarea><div class="hint">// une ligne = une puce</div></div>
+
+      <div class="section-label">Fiche technique</div><div id="g-specs"></div>
+      <button class="btn btn-ghost" id="g-add-spec" style="margin-top:6px">+ Ajouter une ligne</button>
+
+      <div class="section-label">Médias (carousel — images & vidéos)</div><div id="g-media"></div>
+      <button class="btn btn-ghost" id="g-add-media" style="margin-top:6px">+ Ajouter un média</button>
+      <div class="hint" style="margin-top:8px">// vidéo : colle un lien YouTube/Vimeo ou un .mp4 direct</div>
+
+      <div class="editor-actions">
+        <button class="btn btn-primary" id="g-save">${editing?'Enregistrer':'Publier le jeu'}</button>
+        <button class="btn btn-ghost" onclick="location.hash='#games'">Annuler</button></div>
+      <div class="err" id="g-err"></div></div>`;
+
+    const specBox = document.getElementById('g-specs');
+    function renderSpecs(){
+      specBox.innerHTML = specs.map((s,i)=>`<div class="repeat-row spec">
+        <input class="input" placeholder="Label" data-sl="${i}" value="${gEsc(s.label||'')}" />
+        <input class="input" placeholder="Valeur" data-sv="${i}" value="${gEsc(s.value||'')}" />
+        <button class="btn btn-danger" data-srm="${i}">✕</button></div>`).join('');
+      specBox.querySelectorAll('[data-sl]').forEach(el=>el.oninput=()=>specs[el.dataset.sl].label=el.value);
+      specBox.querySelectorAll('[data-sv]').forEach(el=>el.oninput=()=>specs[el.dataset.sv].value=el.value);
+      specBox.querySelectorAll('[data-srm]').forEach(el=>el.onclick=()=>{specs.splice(+el.dataset.srm,1);if(!specs.length)specs.push({label:'',value:''});renderSpecs();});
+    }
+    renderSpecs();
+    document.getElementById('g-add-spec').onclick=()=>{specs.push({label:'',value:''});renderSpecs();};
+
+    const mediaBox = document.getElementById('g-media');
+    function renderMedia(){
+      mediaBox.innerHTML = media.map((m,i)=>`<div class="repeat-row media">
+        <select class="input" data-mt="${i}">
+          <option value="image" ${m.type!=='video'?'selected':''}>Image</option>
+          <option value="video" ${m.type==='video'?'selected':''}>Vidéo</option></select>
+        <input class="input" placeholder="URL" data-mu="${i}" value="${gEsc(m.url||'')}" />
+        <input class="input" placeholder="Légende" data-md="${i}" value="${gEsc(m.desc||'')}" />
+        <button class="btn btn-danger" data-mrm="${i}">✕</button></div>`).join('');
+      mediaBox.querySelectorAll('[data-mt]').forEach(el=>el.onchange=()=>media[el.dataset.mt].type=el.value);
+      mediaBox.querySelectorAll('[data-mu]').forEach(el=>el.oninput=()=>media[el.dataset.mu].url=el.value);
+      mediaBox.querySelectorAll('[data-md]').forEach(el=>el.oninput=()=>media[el.dataset.md].desc=el.value);
+      mediaBox.querySelectorAll('[data-mrm]').forEach(el=>el.onclick=()=>{media.splice(+el.dataset.mrm,1);if(!media.length)media.push({type:'image',url:'',desc:''});renderMedia();});
+    }
+    renderMedia();
+    document.getElementById('g-add-media').onclick=()=>{media.push({type:'image',url:'',desc:''});renderMedia();};
+
+    document.getElementById('g-save').onclick=()=>{
+      const name=document.getElementById('g-name').value.trim();
+      if(!name){document.getElementById('g-err').textContent='Le nom du jeu est obligatoire.';return;}
+      const featured=document.getElementById('g-featured').checked;
+      if(featured){
+        const others=getGames().filter(x=>x.featured && x.id!==id).length;
+        if(others>=3){document.getElementById('g-err').textContent='Déjà 3 jeux promus. Retire-en un avant d\'en ajouter un autre.';return;}
+      }
+      const data={name,
+        genre:document.getElementById('g-genre').value.trim(),
+        badge:document.getElementById('g-badge').value,
+        pitch:document.getElementById('g-pitch').value.trim(),
+        cover:document.getElementById('g-cover').value.trim(),
+        featured:featured,
+        steamUrl:document.getElementById('g-steam').value.trim(),
+        trailerUrl:document.getElementById('g-trailer').value.trim(),
+        description:document.getElementById('g-desc').value.trim(),
+        features:document.getElementById('g-feats').value.trim(),
+        specs:specs.filter(s=>s.value&&s.value.trim()),
+        media:media.filter(m=>m.url&&m.url.trim())};
+      if(editing)updateGame(id,data);else addGame(data);
+      location.hash='#games';route();
+    };
+  }
+
+  // ---------- ROUTEUR ----------
+  window.route = function(){
+    syncTopbar();
+    if (!isLoggedIn()){ viewLogin(); return; }
+    const h = location.hash.replace(/^#/, '');
+    if (h === '' || h === 'list'){ viewDevlogList(); return; }
+    if (h === 'new'){ viewDevlogEditor(null); return; }
+    if (h.startsWith('edit/')){ viewDevlogEditor(h.slice(5)); return; }
+    if (h === 'games'){ viewGamesList(); return; }
+    if (h === 'game-new'){ viewGameEditor(null); return; }
+    if (h.startsWith('game-edit/')){ viewGameEditor(h.slice(10)); return; }
+    location.hash = '#list'; viewDevlogList();
+  };
+  window.addEventListener('hashchange', route);
+  route();
+})();
+</script>
+</body>
+</html>
